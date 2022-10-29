@@ -1,32 +1,28 @@
-// const argv = require('yargs').argv;
-// const fs = require('fs').promises;
-require('./contacts.js');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const argv = yargs(hideBin(process.argv)).argv;
+const { listContacts, getContactById, removeContact, addContact } = require('./contacts.js');
 
-// TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-      // ...
+      listContacts();
       break;
 
     case 'get':
-      // ... id
+      getContactById(id);
       break;
 
     case 'add':
-      // ... name email phone
+      addContact(name, email, phone);
       break;
 
     case 'remove':
-      // ... id
+      removeContact(id);
       break;
 
     default:
       console.warn('\x1B[31m Unknown action type!');
   }
 }
-
-// invokeAction(argv);
+invokeAction(argv);
