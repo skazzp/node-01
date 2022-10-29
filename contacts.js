@@ -23,8 +23,9 @@ function getContactById(contactId) {
 function removeContact(contactId) {
   fs.readFile(contactsPath)
     .then(data => {
-      const contacts = JSON.parse(data).filter(elem => elem.id !== contactId);
+      const contacts = JSON.parse(data).filter(elem => elem.id !== contactId.toString());
       console.log(contacts);
+      fs.writeFile(contactsPath, JSON.stringify(contacts)).catch(err => console.log(err));
     })
     .catch(err => console.log(err));
 }
